@@ -2,6 +2,8 @@
 
 include_once 'conexao.php';
 
+date_default_timezone_set('America/Sao_Paulo');
+
 ?>
 
 <!DOCTYPE html>
@@ -38,11 +40,26 @@ include_once 'conexao.php';
     tr:hover {
         background-color: #f5f5f5;
     }
+    #dataFiltro {
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    label {
+        color: white;
+        font-weight: bold;
+    }
 </style>
 <body>
     <button><a href="produtos.php">Voltar</a></button>
     <button><a href="graficos.php">graficos</a></button>
+    <button><a href="graficos_por_data.php">graficos por data</a></button>
+    <button><a href="grafico_nome_data.php">graficos por nome e data</a></button>
     <br><br>
+
+        <label for="dataFiltro">Filtrar por Data:</label><?php date_default_timezone_set('America/Sao_Paulo'); ?>
+        <input type="date" id="dataFiltro" value="<?php echo date('Y-m-d'); ?>" oninput="filtrarData()">
+        <br><br>
     <table id="vendas">
         <thead>
             <tr>
@@ -227,6 +244,24 @@ include_once 'conexao.php';
                     ?>
                 </td>
     </table>
-        
+        <script>
+             function filtrarData() {
+            const input = document.getElementById('dataFiltro');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('vendas');
+            const tr = table.getElementsByTagName('tr');
+            for (let i = 1; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName('td')[5]; // coluna "Data"
+                if (td) {
+                    const txtValue = td.textContent || td.innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = '';
+                    } else {
+                        tr[i].style.display = 'none';
+                    }
+                }
+            }
+        }
+        </script>
 </body>
 </html>
