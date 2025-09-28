@@ -23,7 +23,7 @@
             //$_SESSION['user_id'] = $user_data['id']; // Armazena o user_id na sessão
             $_SESSION['nome'] = $user_data['nome'];
             $_SESSION['senha'] = $user_data['senha'];
-            header('Location: funcionario.php');// Redirect to funcionario.php
+            header('Location: produtos.php');// Redirect to funcionario.php
             exit();
         }
     } else {

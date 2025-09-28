@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela login</title>
+    <style>
+        body{
+            background-color: rgba(255, 201, 5, 0.846);  
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: rgba(249, 255, 131, 0.695);
+            padding: 15px;
+            border-radius: 15px;
+            width: 30%;
+            color: rgb(15, 15, 15);
+        }
+        .inputbox{
+            position: relative;
+           
+        }
+        .inputUser{
+            background: none;
+            border: none;
+            border-bottom: 1px solid rgb(11, 11, 11);
+            outline: none;
+            color: rgb(8, 8, 8);
+            font-size: 15px;
+            width: 100%;
+            letter-spacing: 3px; 
+        }
+        .labelInput{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            pointer-events: none;
+            transition: .5px;
+            color: rgb(3, 3, 3);
+        }
+        .inputUser:focus ~ .labelInput,
+        .inputUser:valid ~ .labelInput{
+            top: -20px;
+            font-size: 12px;
+            color: dodgerblue;
+        }
+        .button{
+            background-color: rgb(253, 253, 154);
+            padding: 15px;
+            border-radius: 15px;
+            position: absolute;
+            
+        }
+        .inputsubmit
+        {
+            background-image: linear-gradient(to right,rgb(173, 220, 20), rgb(43, 43, 18));
+            width: 100%;
+            border: none;
+            padding: 10px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .inputsubmit:hover
+        {
+            background-image: linear-gradient(to right,rgb(43, 43, 18), rgb(173, 220, 20));
+        }
+       
+       
+
+    </style>
+</head>
+<body>
+    <h1>Olá usuário !</h1>
+    <br><br><br><br><br>
+    <h2>Sistema de registro de fucionário.</h2>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <div class="button">
+        <a href="sistema.php">Acesse aqui</a>
+        <a href="home.html">Voltar</a>
+    </div>
+    <a href="home.html">Voltar</a>
+    
+        <div class="box">
+            <h3>Login</h3>
+            <form action="">
+                <legend><b>Preencha seus dados</b></legend>
+                <br>
+                <br>
+                <br>
+                <div class="inputbox">
+                    <input type="text" name="email" id="email" class="inputUser" required>
+                    <label for="email" class="labelInput">email</label>
+                </div>
+                <br>
+                <br>
+                <div class="inputbox">
+                    <input type="text" name="nome" id="nome" class="inputUser" required>
+                    <label for="nome" class="labelInput">nome</label>
+                </div>
+                <br>
+                <br>
+                <div class="inputbox">
+                    <input type="text" name="sobrenome" id="sobrenome" class="inputUser" required>
+                    <label for="sobrenome" class="labelInput">sobrenome</label>
+                </div>
+                <br>
+                <br>
+                <div class="inputbox">
+                    <input type="text" name="senha" id="senha" class="inputUser" required>
+                    <label for="senha" class="labelInput">senha</label>
+                </div>
+                <br>
+                <br>
+                <input class="inputsubmit" type="submit" name="submit" value="Enviar">
+            </form>
+        </div>
+  
+</body>
+</html>

@@ -8,7 +8,13 @@
         unset($_SESSION['senha']);
         header('Location: index.php');
         exit();  // Importante adicionar o exit() após o redirecionamento
+        
     }
+
+     // Consultar os usuários no estoque
+        $sql_usuario = "SELECT id, nome, cpf, telefone FROM usuarios";
+        $result_usuarios = $conn->query($sql_usuario);
+
          // Consultar os produtos no estoque
         $sql_estoque = "SELECT id, produto, valor FROM estoque";
         $result_estoque = $conn->query($sql_estoque);
@@ -64,7 +70,7 @@
         max-width: 400px;/* Largura máxima da caixa */
         text-align: center; /* Centraliza o conteúdo dentro da caixa */
     }
-    #produto, #valor, #quantidade, #data_venda {/* Define estilos para os campos de entrada*/
+    #produto, #input, #valor, #quantidade, #data_venda {/* Define estilos para os campos de entrada*/
         width: 50%;/* Define a largura do campo de entrada*/
         padding: 5px;/* Campo de entrada para o nome*/
         margin: 5px 0;/* Margem entre os campos*/
@@ -85,23 +91,45 @@
 
     <header> <!-- Início do cabeçalho -->
         <button><a href="sair.php">Sair</a></button> <!-- Botão com link para outra página -->
-        <button><a href="funcionario.php">Dados Pessoais</a></button> <!-- Botão com link para outra página -->
+        <button><a href="vendas.php">Dados da Venda</a></button> <!-- Botão com link para outra página -->
 
     </header> <!-- Fim do cabeçalho -->
     <div class="box">
         <form id="myForm" method="POST" action="processar_produtos.php"> <!-- Formulário para cadastro de produtos -->
+             
+            <select name="nome" id="input">
+                <option value="">FUNCIONÁRIO</option autofocus require>
+                <?php
+                
+                // Verifica se a consulta retornou resultados
+                 if ($result_usuarios->num_rows > 0) {
+                        while($row = $result_usuarios->fetch_assoc()) {// Itera sobre os resultados
+                            
+                            echo "<option value='" . $row['nome'] . "' data-cpf='" . $row['cpf'] . "' data-telefone='" . $row['telefone'] . "'>" . $row['nome'] . "</option>";
 
-            <label for="filtroProduto">Filtrar Produto:</label>
-            <input type="text" id="filtroProduto" placeholder="Buscar produto..." autofocus> <!-- Campo de entrada para filtro de produtos -->
-            <select name="produto" id="produto" required> <!-- Campo de seleção para produtos -->
-                <option value="">Selecione</option>
+                        }
+                        }
+                     else {
+                        echo "<option value=''>Nenhum funcionário encontrado</option>";
+                    }
+                ?>
+
+            </select>
+
+        <!--<label for="filtroProduto">Filtrar Produto:</label autofocus>
+           <input type="text" id="filtroProduto" placeholder="Buscar produto..." autofocus> 
+        -->    
+            <br>
+            <select name="produto" id="produto" required>                   
+               <option value="">PRODUTO</option>
+               <br><br>
                 <?php
                 
                 // Verifica se a consulta retornou resultados
                  if ($result_estoque->num_rows > 0) {
                         while($row = $result_estoque->fetch_assoc()) {// Itera sobre os resultados
 
-                            echo "<option value='" . $row['produto'] . "' data-valor='" . $row['valor'] . "'>" . $row['produto'] . "</option>";
+                            echo "<option value='" . $row['produto']  . "'>" . $row['produto'] . "</option>";
 
                         }
                         }
@@ -109,11 +137,13 @@
                         echo "<option value=''>Nenhum produto encontrado</option>";
                     }
                 ?>
-            <br><br><br>
+            </select>
+            <br><br>
+            
+            
 
             <label for="valor">Valor:</label>
-            <input type="number" id="valor" name="valor" step="0.01" required readonly> <!-- Campo de entrada para valor, somente leitura -->
-            <!-- O atributo 'readonly' impede que o usuário edite o valor, que é preenchido automaticamente ao selecionar um produto -->
+            <input type="number" id="valor" name="valor" value="valor" step="0.01" required > 
             <br><br>
 
             <label for="quantidade">Quantidade:</label>

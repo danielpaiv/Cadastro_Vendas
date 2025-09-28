@@ -40,10 +40,14 @@ include_once 'conexao.php';
     }
 </style>
 <body>
+    <button><a href="produtos.php">Voltar</a></button>
+    <button><a href="graficos.php">graficos</a></button>
+    <br><br>
     <table id="vendas">
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Nome</th>
                 <th>Produto</th>
                 <th id="valor">Valor</th>
                 <th id="quantidade">Quantidade</th>
@@ -59,46 +63,170 @@ include_once 'conexao.php';
                 if (!$result) {
                     die("Erro na consulta: " . mysqli_error($conn));// Exibe mensagem de erro se a consulta falhar
                 }
+                // Inicializa variáveis para armazenar os totais por nome
+                    $totalDaniel = 0;
+                    $totalAlexsandra = 0;
+                    $totalTatiane = 0;
+                    $totalThiago = 0;
+                    $totalMaikon = 0;
+                    $totalAirton = 0;
+                    $totalVinicios = 0;
+                    $totalAbraao = 0;
+                    $totalKalaff = 0;
+                    $totalErika = 0;
+                    $totalHenagio = 0;
+                // Loop para exibir os dados na tabela
                 while ($userdata = mysqli_fetch_assoc($result)) {// Percorre os resultados da consulta
                     // Exibe cada venda em uma linha da tabela
                     echo "<tr>";
                     echo "<td>" . $userdata['id'] . "</td>";
+                    echo "<td>" . $userdata['nome'] . "</td>";
                     echo "<td>" . $userdata['produto'] . "</td>";
                     echo "<td>" . $userdata['valor'] . "</td>";
                     echo "<td>" . $userdata['quantidade'] . "</td>";
                     echo "<td>" . $userdata['data_venda'] . "</td>";
                     echo "</tr>";
-                }
+
+                    // Soma se o nome for Daniel
+                        if ($userdata['nome'] == 'Daniel') {
+                            $totalDaniel += $userdata['valor'];
+                        }
+                        // Soma se o nome for Alexsandra
+                        if ($userdata['nome'] == 'Alexsandra') {
+                            $totalAlexsandra += $userdata['valor'];
+                        }
+                        // Soma se o nome for Tatiane
+                        if ($userdata['nome'] == 'Tatiane') {
+                            $totalTatiane += $userdata['valor'];
+                        }
+                        // Soma se o nome for Thiago
+                        if ($userdata['nome'] == 'Thiago') {
+                            $totalThiago += $userdata['valor'];
+                        }
+                        // Soma se o nome for Maikon
+                        if ($userdata['nome'] == 'Maikon') {
+                            $totalMaikon += $userdata['valor'];
+                        }
+                        // Soma se o nome for Airton
+                        if ($userdata['nome'] == 'Airton') {
+                            $totalAirton += $userdata['valor'];
+                        }
+                        // Soma se o nome for Vinicios
+                        if ($userdata['nome'] == 'Vinicios') {
+                            $totalVinicios += $userdata['valor'];
+                        }
+                        // Soma se o nome for Abraao
+                        if ($userdata['nome'] == 'Abraao') {    
+                            $totalAbraao += $userdata['valor'];
+                        }
+                        // Soma se o nome for Kalaff
+                        if ($userdata['nome'] == 'Kalaff') {    
+                            $totalKalaff += $userdata['valor'];
+                        }
+                        // Soma se o nome for Erika
+                        if ($userdata['nome'] == 'Erika') {    
+                            $totalErika += $userdata['valor'];
+                        }
+                        // Soma se o nome for Hnagio
+                        if ($userdata['nome'] == 'Henagio') {    
+                            $totalHenagio += $userdata['valor'];
+                        }
+                        }
+                    // Exibe nova tabela com o total
+                        echo "<table border='1' style='margin-top:20px; width:50px;'>";// Tabela para Daniel
+                        echo "<tr><th>Nome</th><th>Total Valor</th></tr>";
+                        echo "<tr><td>Alexsandra</td><td>" . number_format($totalAlexsandra, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Daniel</td><td>" . number_format($totalDaniel, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Tatiane</td><td>" . number_format($totalTatiane, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Thiago</td><td>" . number_format($totalThiago, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Maikon</td><td>" . number_format($totalMaikon, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Airton</td><td>" . number_format($totalAirton, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Vinicios</td><td>" . number_format($totalVinicios, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Abraao</td><td>" . number_format($totalAbraao, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Kalaff</td><td>" . number_format($totalKalaff, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Erika</td><td>" . number_format($totalErika, 2, ',', '.') . "</td></tr>";
+                        echo "<tr><td>Henagio</td><td>" . number_format($totalHenagio, 2, ',', '.') . "</td></tr>";
+                        echo "</table>";
+
+                
+
+               
+
             ?>
         </tbody>
-
     </table>
-        <script>
-           document.addEventListener("DOMContentLoaded", function() {
-               const vendasTable = document.getElementById('valor');
-                const quantidadeTable = document.getElementById('quantidade');
-                // Verifica se as tabelas de vendas e quantidade existem
-                let totalValor = 0;// Inicializa a variável totalValor
-                let totalQuantidade = 0;// Inicializa a variável totalQuantidade
 
-                const table = document.getElementById('vendas').getElementsByTagName('tbody')[0];// Obtém o corpo da tabela de vendas
+    
+    <br><br>
+    <h2 style="color: white;">Total de Litros Vendidos por Produto</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="background-color: #d32f2f; color: white;">GASOLINA COMUM</th>
+                <th style="background-color: #1565c0; color: white;">GASOLINA DURA MAIS</th>
+                <th style="background-color: #2e7d32; color: white;">ETANOL</th>
+                <th style="background-color: #424242; color: white;">DIESEL S10</th>
+            </tr>
+        </thead>
+         <tbody>
+            <tr>
+                <td>
+                    <?php
+                    // Reabrir a conexão para a nova consulta
+                    include('conexao.php');
 
-                for (let i = 0; i < table.rows.length; i++) {// Percorre cada linha da tabela
+                    $sql_gasolina_comum = "SELECT SUM(quantidade) AS total_gasolina_comum FROM vendas WHERE produto = 'GASOLINA COMUM'";
+                    $result_gasolina_comum = $conn->query($sql_gasolina_comum);
+                    $row_gasolina_comum = $result_gasolina_comum->fetch_assoc();
+                    echo $row_gasolina_comum['total_gasolina_comum'] ? $row_gasolina_comum['total_gasolina_comum'] . ' L' : '0 L';
 
-                    totalValor += parseFloat(table.rows[i].cells[2].textContent) || 0; // Soma os valores da coluna "Valor"
-                    totalQuantidade += parseInt(table.rows[i].cells[3].textContent, 10) || 0; // Soma os valores da coluna "Quantidade"
-                }
-                const totalRow = document.createElement('tr');// Cria uma nova linha para os totais
-                // Adiciona células para os totais
-                totalRow.innerHTML = `  
-                    <td colspan="2" style="font-weight:bold; background-color: #f5f5f5;">Totais</td> <!-- Define o estilo da célula de totais -->
-                    <td style="font-weight:bold;background-color: #f5f5f5;">${totalValor.toFixed(2)}</td> <!-- Formata o total de valor com duas casas decimais -->
-                    <td style="font-weight:bold;background-color: #f5f5f5;">${totalQuantidade}</td> <!-- Exibe o total de quantidade -->
-                    <td></td>
-                `;
-                table.appendChild(totalRow);// Adiciona a linha de totais ao corpo da tabela
-            });
-            
-        </script>
+                    // Fechar a conexão
+                    $conn->close();
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    // Reabrir a conexão para a nova consulta
+                    include('conexao.php');
+
+                    $sql_gasolina_dura_mais = "SELECT SUM(quantidade) AS total_gasolina_dura_mais FROM vendas WHERE produto = 'GASOLINA DURA MAIS'";
+                    $result_gasolina_dura_mais = $conn->query($sql_gasolina_dura_mais);
+                    $row_gasolina_dura_mais = $result_gasolina_dura_mais->fetch_assoc();
+                    echo $row_gasolina_dura_mais['total_gasolina_dura_mais'] ? $row_gasolina_dura_mais['total_gasolina_dura_mais'] . ' L' : '0 L';
+
+                    // Fechar a conexão
+                    $conn->close();
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    // Reabrir a conexão para a nova consulta
+                    include('conexao.php');
+
+                    $sql_gasolina_comum = "SELECT SUM(quantidade) AS total_etanol FROM vendas WHERE produto = 'ETANOL'";
+                    $result_gasolina_comum = $conn->query($sql_gasolina_comum);
+                    $row_gasolina_comum = $result_gasolina_comum->fetch_assoc();
+                    echo $row_gasolina_comum['total_etanol'] ? $row_gasolina_comum['total_etanol'] . ' L' : '0 L';
+
+                    // Fechar a conexão
+                    $conn->close();
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    // Reabrir a conexão para a nova consulta
+                    include('conexao.php');
+
+                    $sql_gasolina_comum = "SELECT SUM(quantidade) AS total_diesel_s10 FROM vendas WHERE produto = 'DIESEL S10'";
+                    $result_gasolina_comum = $conn->query($sql_gasolina_comum);
+                    $row_gasolina_comum = $result_gasolina_comum->fetch_assoc();
+                    echo $row_gasolina_comum['total_diesel_s10'] ? $row_gasolina_comum['total_diesel_s10'] . ' L' : '0 L';
+
+                    // Fechar a conexão
+                    $conn->close();
+                    ?>
+                </td>
+    </table>
+        
 </body>
 </html>

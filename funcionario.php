@@ -96,7 +96,7 @@
     <div class="box">
        <form id="myForm" action="processar_funcionario.php" method="POST">
             <select name="nome" id="input">
-                <option value="">Selecione o nome</option>
+                <option value="">Selecione o nome</option autofocus>
                 <?php
                 
                 // Verifica se a consulta retornou resultados
