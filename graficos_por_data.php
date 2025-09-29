@@ -78,9 +78,9 @@ $valores_json = json_encode($valores);
     <h2>Total de Vendas por Dia</h2>
 
     <button><a href="produtos.php">Voltar</a></button>
-    <button><a href="graficos.php">graficos</a></button>
-    <button><a href="graficos_por_data.php">graficos por data</a></button>
-    <button><a href="grafico_nome_data.php">graficos por nome e data</a></button>
+    <button><a href="graficos.php">grafico Geral</a></button>
+    <button><a href="graficos_por_data.php">grafico por data</a></button>
+    <button><a href="grafico_nome_data.php">grafico por nome e data</a></button>
     <br><br>
 
     <!-- 5️⃣ Tabela Resumida -->
